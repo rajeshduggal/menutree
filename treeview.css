@@ -1,0 +1,72 @@
+div[role="application"] {
+	font-family: Arial;
+	font-size: 12px;
+	color: white;
+}
+
+div[role="application"] > h2 {
+	margin: .5em 0em !important;
+	padding: 0em !important;
+	font-size: 1.5em !important;
+}
+
+ul.tree {
+	width: 95%;
+	padding-top: 23px;
+}
+
+ul.tree, ul.tree ul {
+	list-style: none;
+	margin: 0px !important;
+	padding-left: 0px !important;
+	/*background-color: #330066;*/
+	color: white;
+}
+	
+ul.tree li {
+	padding-left: 20px !important;
+	line-height: 19px;
+	vertical-align: middle;
+}
+
+ul.tree > li {
+	padding-left: 0px !important;
+}
+
+ul.tree li span, ul.tree li a {
+	/*padding-left: 20px;*/
+	width: 100%;
+	cursor: hand;
+	cursor: pointer;
+	display: inline-block;
+	padding-left: 20px !important;
+	background: url('menu_link_local.gif') no-repeat 0px -1px;
+}
+
+ul[role="group"] > li {
+	font-size: 11px;
+}
+
+ul.tree li a {
+	text-decoration: none;
+	color: white;
+}
+
+li.tree-focus, 
+ul.tree li.tree-focus > a {
+	color: #FFCB01;
+}
+
+ul.tree li.tree-parent[aria-expanded="false"] > span, 
+ul.tree li.tree-focus[aria-expanded="false"] > span {
+	background: url('arrow_right.gif') no-repeat 0px 0px;
+}
+
+ul.tree li.tree-parent[aria-expanded="true"] > span, 
+ul.tree li.tree-focus[aria-expanded="true"] > span {
+	background: url('arrow_down.gif') no-repeat 0px 0px;
+}
+
+ul[aria-hidden="true"] {
+   display: none;
+}

@@ -3,6 +3,7 @@ com = com || {};
 com.bns = com.bns || {};
 com.bns.hr = com.bns.hr || {};
 
+// Accessibility: Role and empty span hack is needed, or else ZoomText reader will announce "has submenu" on menuitems that don't have a submenu.
 
 (function($) {
 	$.fn.treeview = function(options) {
@@ -25,7 +26,7 @@ com.bns.hr.Treeview = function(treeId, settings) {
 		if (!jsonData.items) return; // No list to render, abort
 		
 		// Create parent container
-		var $container = $(document.createElement("div")).attr("role", "application");
+		var $container = $(document.createElement("div"));
 		
 		// Create heading, if supplied
 		if (jsonData.header) {
@@ -70,18 +71,20 @@ com.bns.hr.Treeview = function(treeId, settings) {
 				if (visible) {
 					$content = $(document.createElement("a"))
 						.attr("href", item.l)
-						.html(item.d);
+						.attr("role", "presentation")
+						.html(item.d + "<span style=\"display:none;\">&nbsp;</span>");
 				} else {
 					$content = $(document.createElement("a"))
 						.attr("href", item.l)
-						.attr("title",item.d);
+						.attr("title",item.d)
+						.attr("role", "presentation");
 				} 
 				if (item.t)	//NOTE: Should this always be set and default to the main frame???
 					$content.attr("target", item.t);
 			}
 			else //must be a title only
 				if (visible) {
-					$content = $(document.createElement("span")).html(item.d);
+					$content = $(document.createElement("span")).html(item.d + "<span style=\"display:none;\">&nbsp;</span>");
 				} else {
 					$content = $(document.createElement("span"))
 						.attr('title',item.d)
@@ -123,7 +126,7 @@ com.bns.hr.Treeview = function(treeId, settings) {
 		if (collapse === false) {
       $elem.attr("aria-expanded", true);
 			$elem.children('ul').children('li').children('a').each(function() {
-				$(this).html($(this).attr('title')); //copy the title attr to the html
+				$(this).html($(this).attr('title') + "<span style=\"display:none;\">&nbsp;</span>"); //copy the title attr to the html
 			});
 			$elem.children('ul').children('li').children('span').each(function() {
 				$(this).html($(this).attr('title')); //copy the title attr to the html
